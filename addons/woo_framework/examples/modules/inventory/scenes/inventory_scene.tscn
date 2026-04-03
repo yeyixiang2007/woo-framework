@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/woo_framework/examples/modules/inventory/views/inventory_view.gd" id="1"]
+
+[node name="InventoryScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 80.0
+offset_right = -100.0
+offset_bottom = -80.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox"]
+text = "Inventory Module"
+
+[node name="CoinsLabel" type="Label" parent="Panel/VBox"]
+text = "Coins: 0"
+
+[node name="ItemsLabel" type="Label" parent="Panel/VBox"]
+text = "Items: (empty)"
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/VBox"]
+
+[node name="AddPotionButton" type="Button" parent="Panel/VBox/Buttons"]
+text = "Add Potion"
+
+[node name="RemovePotionButton" type="Button" parent="Panel/VBox/Buttons"]
+text = "Remove Potion"
+
+[node name="GrantCoinsButton" type="Button" parent="Panel/VBox/Buttons"]
+text = "Grant 10 Coins"
+
+[node name="PurchasePotionButton" type="Button" parent="Panel/VBox/Buttons"]
+text = "Purchase Potion (5)"

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TemplateModel" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/woo_framework/editor/templates/module/models/template_model.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+value = 0
