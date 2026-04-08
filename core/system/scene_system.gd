@@ -183,5 +183,5 @@ func _normalize_path(path_value: Variant) -> String:
 
 func _ensure_app() -> WooApp:
 	if app == null:
-		app = Woo.get_app()
+		app = WooApp.get_instance()
 	return app

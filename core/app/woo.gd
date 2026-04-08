@@ -1,16 +1,13 @@
 class_name Woo
 extends Node
 
-static var app: WooApp
-
-
 static func set_app(instance: WooApp) -> void:
-	app = instance
+	WooApp.set_instance(instance)
 
 
 static func clear_app() -> void:
-	app = null
+	WooApp.clear_instance()
 
 
 static func get_app() -> WooApp:
-	return app
+	return WooApp.get_instance()

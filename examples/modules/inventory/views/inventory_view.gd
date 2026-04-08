@@ -14,7 +14,7 @@ var currency_model: CurrencyModel
 
 
 func _ready() -> void:
-	app = Woo.get_app()
+	app = WooApp.get_instance()
 	if app == null:
 		return
 

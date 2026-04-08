@@ -22,6 +22,4 @@ func on_view_ready() -> void:
 
 func _attach_app() -> void:
 	if app == null:
-		app = Woo.get_app()
-	if app == null:
 		app = WooApp.get_instance()

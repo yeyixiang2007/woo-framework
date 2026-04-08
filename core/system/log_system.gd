@@ -115,5 +115,5 @@ func _add_entry(entry_type: String, payload: Dictionary) -> void:
 
 func _ensure_app() -> WooApp:
 	if app == null:
-		app = Woo.get_app()
+		app = WooApp.get_instance()
 	return app

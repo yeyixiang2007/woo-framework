@@ -56,8 +56,6 @@ func emit_event(event_id: StringName, args: Array = []) -> void:
 
 func _attach_app() -> void:
 	if app == null:
-		app = Woo.get_app()
-	if app == null:
 		app = WooApp.get_instance()
 	if app == null:
 		return

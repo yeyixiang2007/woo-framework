@@ -93,8 +93,6 @@ func _build_ui() -> void:
 
 func _resolve_app() -> void:
 	if app == null:
-		app = Woo.get_app()
-	if app == null:
 		app = WooApp.get_instance()
 	_bind_app_signals()
 

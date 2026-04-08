@@ -23,19 +23,25 @@ var runtime_state: Dictionary = {}
 
 
 func _enter_tree() -> void:
-	instance = self
-	Woo.set_app(self)
+	set_instance(self)
 
 
 func _exit_tree() -> void:
-	if instance == self:
-		instance = null
-	if Woo.get_app() == self:
-		Woo.clear_app()
+	clear_instance(self)
 
 
 static func get_instance() -> WooApp:
 	return instance
+
+
+static func set_instance(app_instance: WooApp) -> void:
+	instance = app_instance
+
+
+static func clear_instance(expected_instance: WooApp = null) -> void:
+	if expected_instance != null and instance != expected_instance:
+		return
+	instance = null
 
 
 func boot(owner: Node) -> void:
@@ -113,7 +119,7 @@ func _reset_runtime_registries() -> void:
 
 
 func _resolve_event_bus() -> EventBus:
-	if get_tree() != null:
+	if is_inside_tree():
 		var candidate := get_tree().root.get_node_or_null("WooEventBus") as EventBus
 		if candidate != null:
 			candidate.app = self

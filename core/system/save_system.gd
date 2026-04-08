@@ -202,7 +202,7 @@ func get_slot_metadata(slot_id: StringName) -> Dictionary:
 
 func _ensure_app() -> WooApp:
 	if app == null:
-		app = Woo.get_app()
+		app = WooApp.get_instance()
 	return app
 
 
