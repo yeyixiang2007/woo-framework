@@ -6,7 +6,7 @@ This document covers the runtime core APIs under `core/`.
 
 ## `Woo` (`core/app/woo.gd`)
 
-Global static accessor (autoload).
+Global static accessor (global script class).
 
 Methods:
 - `set_app(instance: WooApp) -> void`

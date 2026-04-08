@@ -1,3 +1,4 @@
+class_name Woo
 extends Node
 
 static var app: WooApp

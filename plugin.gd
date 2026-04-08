@@ -3,8 +3,10 @@ extends EditorPlugin
 
 const ICON_PATH := "res://addons/woo_framework/plugin_icon.svg"
 const AUTOLOADS := {
-	"Woo": "res://addons/woo_framework/core/app/woo.gd",
 	"WooEventBus": "res://addons/woo_framework/core/bus/event_bus.gd",
+}
+const LEGACY_AUTOLOADS := {
+	"Woo": "res://addons/woo_framework/core/app/woo.gd",
 }
 const CUSTOM_TYPES := [
 	{
@@ -25,6 +27,7 @@ var _icon: Texture2D
 func _enter_tree() -> void:
 	_icon = load(ICON_PATH) as Texture2D
 	_register_custom_types()
+	_remove_legacy_autoloads()
 	_ensure_autoloads()
 
 
@@ -33,11 +36,13 @@ func _exit_tree() -> void:
 
 
 func _enable_plugin() -> void:
+	_remove_legacy_autoloads()
 	_ensure_autoloads()
 
 
 func _disable_plugin() -> void:
 	_remove_managed_autoloads()
+	_remove_legacy_autoloads()
 
 
 func _register_custom_types() -> void:
@@ -63,6 +68,15 @@ func _remove_managed_autoloads() -> void:
 	var changed := false
 	for autoload_name in AUTOLOADS.keys():
 		if _remove_autoload_if_managed(autoload_name, AUTOLOADS[autoload_name]):
+			changed = true
+	if changed:
+		ProjectSettings.save()
+
+
+func _remove_legacy_autoloads() -> void:
+	var changed := false
+	for autoload_name in LEGACY_AUTOLOADS.keys():
+		if _remove_autoload_if_managed(autoload_name, LEGACY_AUTOLOADS[autoload_name]):
 			changed = true
 	if changed:
 		ProjectSettings.save()

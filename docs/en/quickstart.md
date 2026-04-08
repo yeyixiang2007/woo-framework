@@ -8,7 +8,7 @@ In Godot Editor:
 
 1. Open `Project Settings -> Plugins`.
 2. Enable `WooFramework`.
-3. Plugin-managed autoloads (`Woo`, `WooEventBus`) are ensured automatically.
+3. The plugin ensures the `WooEventBus` autoload automatically, and `Woo` is available as a global script class.
 
 ## 2. Create a bootstrap scene
 
@@ -23,7 +23,8 @@ Important exported fields:
 - `enable_debug_panel`: whether to mount F3 debug panel.
 
 Manual fallback:
-- If you do not use the plugin manager, add `Woo` and `WooEventBus` under `project.godot` autoload.
+- If you do not use the plugin manager, add `WooEventBus` under `project.godot` autoload.
+- `Woo` does not need an autoload entry.
 
 ## 3. Create module directory layout
 

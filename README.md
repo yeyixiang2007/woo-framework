@@ -17,8 +17,8 @@ WooFramework is a modular runtime framework for Godot 4. It is designed to let p
 1. Copy `addons/woo_framework` into your project `addons` folder.
 2. Open `Project Settings -> Plugins`.
 3. Enable `WooFramework`.
-4. The plugin will automatically ensure these autoloads exist:
-`Woo` and `WooEventBus`.
+4. The plugin will automatically ensure the `WooEventBus` autoload exists.
+`Woo` is available globally as a script class.
 5. Attach `res://addons/woo_framework/core/app/woo_bootstrap.gd` to your main scene root node.
 
 ## 5-Min Runtime QuickStart

@@ -6,7 +6,7 @@
 
 ## `Woo` (`core/app/woo.gd`)
 
-全局静态入口（由 autoload 注入）。
+全局静态入口（全局脚本类）。
 
 方法：
 - `set_app(instance: WooApp) -> void`

@@ -8,7 +8,7 @@
 
 1. 打开 `Project Settings -> Plugins`。
 2. 启用 `WooFramework`。
-3. 插件会自动确保 `Woo`、`WooEventBus` 两个 autoload。
+3. 插件会自动确保 `WooEventBus` autoload，`Woo` 则作为全局脚本类可直接使用。
 
 ## 2. 创建启动场景（Bootstrap Scene）
 
@@ -23,7 +23,8 @@
 - `enable_debug_panel`：是否挂载 F3 调试面板。
 
 手动兜底方式：
-- 如果你不通过插件管理器启用，也可以在 `project.godot` 手动配置 `Woo` 与 `WooEventBus` autoload。
+- 如果你不通过插件管理器启用，也可以在 `project.godot` 手动配置 `WooEventBus` autoload。
+- `Woo` 不需要额外的 autoload 配置。
 
 ## 3. 创建模块目录
 
