@@ -245,6 +245,76 @@
 
 ## 5. 内置系统
 
+## `TaskSystem` (`core/system/task_system.gd`)
+
+信号：
+- `task_created(task: WooTask)`
+- `task_finished(task: WooTask)`
+
+方法：
+- `set_app(owner_app) -> void`
+- `create_source() -> WooTaskCompletionSource`
+- `completed(result = null) -> WooTask`
+- `failed(error = null) -> WooTask`
+- `canceled(reason := "") -> WooTask`
+- `create_cancellation_source() -> WooCancellationSource`
+- `as_task(value) -> WooTask`
+- `delay(seconds: float, cancel_token: WooCancellationToken = null, process_in_physics := false, process_always := true, ignore_time_scale := false) -> WooTask`
+- `next_frame(cancel_token: WooCancellationToken = null) -> WooTask`
+- `next_physics_frame(cancel_token: WooCancellationToken = null) -> WooTask`
+- `from_signal(signal_ref, cancel_token: WooCancellationToken = null, capture_first_arg := false) -> WooTask`
+- `wait_until(predicate: Callable, cancel_token: WooCancellationToken = null, use_physics_frame := false, timeout_seconds := -1.0) -> WooTask`
+- `when_all(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `when_any(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `race(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `join(task_value)`
+
+辅助类型：
+- `WooTask`
+- `WooTaskCompletionSource`
+- `WooCancellationSource`
+- `WooCancellationToken`
+
+使用要点：
+- 推荐 `await task.finished` 后检查 `task.is_succeeded()` / `task.is_failed()` / `task.is_canceled()`。
+- `join()` 返回成功结果；失败或取消时会 `push_error` 并返回 `null`。
+
+---
+
+## `TweenSystem` (`core/system/tween_system.gd`)
+
+信号：
+- `playback_started(playback: WooTweenPlayback)`
+- `playback_finished(playback: WooTweenPlayback)`
+
+方法：
+- `set_app(owner_app) -> void`
+- `sequence() -> WooTweenSequence`
+- `to(target: Object, property_path, target_value, duration: float) -> WooTweenStep`
+- `value(target_callable: Callable, from_value, to_value, duration: float) -> WooTweenStep`
+- `callback(target_callable: Callable) -> WooTweenStep`
+- `interval(duration: float) -> WooTweenStep`
+- `play(sequence_or_step) -> WooTweenPlayback`
+- `get_task_system() -> TaskSystem`
+- `get_active_playbacks() -> Array`
+- `kill_all() -> void`
+
+辅助类型：
+- `WooTweenStep`
+- `WooTweenSequence`
+- `WooTweenPlayback`
+
+链式能力：
+- `WooTweenStep` 支持 `set_delay()` / `set_trans()` / `set_ease()` / `from_step()` / `from_current()` / `as_relative()`
+- `WooTweenSequence` 支持 `append()` / `join()` / `insert()` / `append_interval()` / `append_callback()` / `append_sequence()`
+- `WooTweenSequence` 支持 `bind_node()` / `set_default_trans()` / `set_default_ease()` / `set_loops()` / `set_infinite_loops()`
+
+使用要点：
+- `WooTweenPlayback.task` 是 `WooTask`，可与 `TaskSystem` 组合。
+- 推荐 `await playback.finished`，或通过 `await task_system.join(playback.task)` 获取成功结果。
+
+---
+
 ## `SceneSystem` (`core/system/scene_system.gd`)
 
 信号：

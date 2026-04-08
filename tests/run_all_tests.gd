@@ -5,19 +5,25 @@ const MODEL_STORE_TEST := preload("res://addons/woo_framework/tests/unit/model_s
 const EVENT_BUS_TEST := preload("res://addons/woo_framework/tests/unit/event_bus_test.gd")
 const COMMAND_BUS_TEST := preload("res://addons/woo_framework/tests/unit/command_bus_test.gd")
 const QUERY_SERVICE_TEST := preload("res://addons/woo_framework/tests/unit/query_service_test.gd")
+const TASK_SYSTEM_TEST := preload("res://addons/woo_framework/tests/unit/task_system_test.gd")
+const TWEEN_SYSTEM_TEST := preload("res://addons/woo_framework/tests/unit/tween_system_test.gd")
 const INTEGRATION_SCENE := preload(
 	"res://addons/woo_framework/tests/integration/scenes/example_modules_integration_test.tscn"
 )
 
 
 func _init() -> void:
+	call_deferred("_run_async")
+
+
+func _run_async() -> void:
 	var runner = TEST_RUNNER.new()
 	if runner == null:
 		push_error("Test runner could not be created.")
 		quit(1)
 		return
 
-	_run_unit_tests(runner)
+	await _run_unit_tests(runner)
 	_run_integration_tests(runner)
 
 	runner.print_summary()
@@ -40,6 +46,14 @@ func _run_unit_tests(runner) -> void:
 
 	runner.start_case("QueryService")
 	QUERY_SERVICE_TEST.run(runner)
+
+	runner.start_case("TaskSystem")
+	TASK_SYSTEM_TEST.run(runner)
+	await TASK_SYSTEM_TEST.run_async(runner)
+
+	runner.start_case("TweenSystem")
+	TWEEN_SYSTEM_TEST.run(runner)
+	await TWEEN_SYSTEM_TEST.run_async(runner)
 
 
 func _run_integration_tests(runner) -> void:

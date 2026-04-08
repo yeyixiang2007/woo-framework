@@ -7,7 +7,7 @@ WooFramework is a modular runtime framework for Godot 4. It is designed to let p
 - Runtime container: `WooApp`
 - Module system: `ModuleRegistry` + `ModuleDefinition`
 - Data/behavior separation: `ModelStore` / `CommandBus` / `QueryService` / `EventBus`
-- Pluggable systems: `SystemRegistry` (built-ins: `SceneSystem`, `SaveSystem`, `ConfigSystem`, `LogSystem`)
+- Pluggable systems: `SystemRegistry` (built-ins: `TaskSystem`, `TweenSystem`, `SceneSystem`, `SaveSystem`, `ConfigSystem`, `LogSystem`)
 - Runtime debugging: `WooDebugPanel` (toggle with F3)
 - Editor builders: `BaseBuilder` / `UiPanelBuilder`
 - Examples and tests: `addons/woo_framework/examples`, `addons/woo_framework/tests`

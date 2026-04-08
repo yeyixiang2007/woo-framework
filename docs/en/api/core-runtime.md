@@ -245,6 +245,76 @@ Methods:
 
 ## 5. Built-in systems
 
+## `TaskSystem` (`core/system/task_system.gd`)
+
+Signals:
+- `task_created(task: WooTask)`
+- `task_finished(task: WooTask)`
+
+Methods:
+- `set_app(owner_app) -> void`
+- `create_source() -> WooTaskCompletionSource`
+- `completed(result = null) -> WooTask`
+- `failed(error = null) -> WooTask`
+- `canceled(reason := "") -> WooTask`
+- `create_cancellation_source() -> WooCancellationSource`
+- `as_task(value) -> WooTask`
+- `delay(seconds: float, cancel_token: WooCancellationToken = null, process_in_physics := false, process_always := true, ignore_time_scale := false) -> WooTask`
+- `next_frame(cancel_token: WooCancellationToken = null) -> WooTask`
+- `next_physics_frame(cancel_token: WooCancellationToken = null) -> WooTask`
+- `from_signal(signal_ref, cancel_token: WooCancellationToken = null, capture_first_arg := false) -> WooTask`
+- `wait_until(predicate: Callable, cancel_token: WooCancellationToken = null, use_physics_frame := false, timeout_seconds := -1.0) -> WooTask`
+- `when_all(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `when_any(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `race(tasks: Array, cancel_token: WooCancellationToken = null) -> WooTask`
+- `join(task_value)`
+
+Helper types:
+- `WooTask`
+- `WooTaskCompletionSource`
+- `WooCancellationSource`
+- `WooCancellationToken`
+
+Usage notes:
+- Prefer `await task.finished`, then inspect `task.is_succeeded()` / `task.is_failed()` / `task.is_canceled()`.
+- `join()` returns the success value. Failed or canceled tasks push an error and return `null`.
+
+---
+
+## `TweenSystem` (`core/system/tween_system.gd`)
+
+Signals:
+- `playback_started(playback: WooTweenPlayback)`
+- `playback_finished(playback: WooTweenPlayback)`
+
+Methods:
+- `set_app(owner_app) -> void`
+- `sequence() -> WooTweenSequence`
+- `to(target: Object, property_path, target_value, duration: float) -> WooTweenStep`
+- `value(target_callable: Callable, from_value, to_value, duration: float) -> WooTweenStep`
+- `callback(target_callable: Callable) -> WooTweenStep`
+- `interval(duration: float) -> WooTweenStep`
+- `play(sequence_or_step) -> WooTweenPlayback`
+- `get_task_system() -> TaskSystem`
+- `get_active_playbacks() -> Array`
+- `kill_all() -> void`
+
+Helper types:
+- `WooTweenStep`
+- `WooTweenSequence`
+- `WooTweenPlayback`
+
+Chaining support:
+- `WooTweenStep` supports `set_delay()` / `set_trans()` / `set_ease()` / `from_step()` / `from_current()` / `as_relative()`
+- `WooTweenSequence` supports `append()` / `join()` / `insert()` / `append_interval()` / `append_callback()` / `append_sequence()`
+- `WooTweenSequence` supports `bind_node()` / `set_default_trans()` / `set_default_ease()` / `set_loops()` / `set_infinite_loops()`
+
+Usage notes:
+- `WooTweenPlayback.task` is a `WooTask`, so it composes directly with `TaskSystem`.
+- Prefer `await playback.finished`, or use `await task_system.join(playback.task)` for success values.
+
+---
+
 ## `SceneSystem` (`core/system/scene_system.gd`)
 
 Signals:
