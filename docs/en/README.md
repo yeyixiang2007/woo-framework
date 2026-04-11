@@ -6,6 +6,7 @@ This documentation set covers WooFramework QuickStart, architecture, and API ref
 
 - [QuickStart](quickstart.md)
 - [Architecture](architecture.md)
+- [Logic Testing System](testing-system.md)
 - [API Overview](api/README.md)
 
 ## API Volumes

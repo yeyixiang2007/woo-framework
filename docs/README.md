@@ -11,4 +11,5 @@ This folder provides complete WooFramework documentation in two languages.
 
 - QuickStart
 - Architecture
+- Logic Testing System: [zh-CN/testing-system.md](zh-CN/testing-system.md), [en/testing-system.md](en/testing-system.md)
 - API Reference (Core Runtime / Module / Builder)

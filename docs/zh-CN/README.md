@@ -6,6 +6,7 @@
 
 - [QuickStart](quickstart.md)
 - [架构说明](architecture.md)
+- [逻辑测试系统](testing-system.md)
 - [API 总览](api/README.md)
 
 ## API 分册
