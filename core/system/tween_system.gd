@@ -183,8 +183,9 @@ func _append_step_tweener(tween: Tween, start_time: float, step: WooTweenStep) -
 			callback_tweener.set_delay(delay)
 			return true
 		WooTweenStep.Kind.INTERVAL:
-			var interval_tweener = tween.tween_interval(step.duration)
-			interval_tweener.set_delay(delay)
+			# IntervalTweener does not support set_delay(), so fold the scheduled
+			# start offset into the interval duration to preserve the timeline span.
+			tween.tween_interval(delay + step.duration)
 			return true
 		_:
 			push_error("TweenSystem: unsupported tween step kind.")
